@@ -1,0 +1,47 @@
+{
+    "lists": [
+        {
+            "title": "Eucaristía 22 de Mayo de 2025",
+            "autor": "jesusmuve",
+            "color": "#e99469",
+            "songs": [
+                {
+                    "titulo": "A ti que estás sentado en tu sillón",
+                    "autor": "Alberto y Emilia",
+                    "tono": "",
+                    "cejilla": 0,
+                    "content": " Do            \nA ti que estás \n           Sol/Si lam     La7\nsentado en tu sillón\nrem                      Sol\natento o distraído, te reclamo.\nFa                 Sol  \nQuiero que hagamos vida \n          Do  La7\nesta canción,\nFa                 \nque a Dios vayamos \nrem             Sol\njuntos de la mano.\n\nDo                    Sol/Si  lam La7\nHasta ahora solo hablamos en teoría\nrem                           Sol \nde un mundo que sería más cristiano,\nFa               Sol \nde un mundo que será \n        Do  mim     lam\nsolo teoría si tú y yo\nFa               rem         Sol\nahora no hacemos nada por cambiarlo.\n\nFa            Sol\nDe poco servirán \n            Do   La7\nnuestros esfuerzos\nrem            \nsi en la calle \n      Sol         Do  Do7\nno hacemos que se noten\nFa                Sol     \nlas palabras que lanzamos \n      Do   La7\na los vientos:\nFa               rem          Sol\nque Cristo sigue vivo en cada hombre.\n\nDo            \nYa no valdrán \n        Sol/Si   lam   La7\nni peros ni disculpas,\nrem                      \nque Cristo no es alguien \n             Sol\ncon quien se juega.\nFa                   Sol    \nSi nuestro mundo no cambia, \n       Do  mim   lam  La7\nsolamente será culpa\nFa               rem         Sol\ndel que diciendo sí, luego reniega.\n\nDo             \nA ti que estás \n          Sol/Si  lam  La7\nsentado en tu sillón\nrem                          Sol\nquisiera que no olvides este rato.\nFa             Sol         Do  La7\nDios ha pasado por este rincón\nFa                 Sol          Do\ny quiere que a Él vayamos de la mano."
+                },
+                {
+                    "titulo": "Adorando",
+                    "autor": "Sonido Joven",
+                    "tono": "",
+                    "cejilla": 0,
+                    "content": "Re \nMorando entre las palabras,\n          Do9\nque se incrustan en mi piel,\n   Sol\npostrado ante tu lecho,\n       Re\nme abandono sin querer.\n\n\nInundado en el alimento\n        Do9             \nque ha saciado a la humanidad,\n       Sol                      Re\ncon el sacrificio inmenso del altar.\n \n        Re                                                              \nSólo mi alma espera en Ti, \n        Do9\nsólo la sed me guía a Ti, \n        Sol\nsólo en Ti y por Ti la vida \n                 La\nse hace dueña de mí. \n[Estribillo]\nRe    Sol                                              \nAdorando, \n         sim              La           \nlo que parece un trozo de pan\n Re     Sol                                                          \ny olvidando \n      sim                La             \nlos pesares que vienen y van \n                   Sol                           \ny en la noche que tiembla \n                Re                                   \nya no quiero tu luz, \n        mim                                                           \nsólo la sed \n                  Sol   mim  Sol             \nde tu sangre y tu cuerpo \n         La       Re                           \nme puede guiar a Ti.\n[/Estribillo]\nRe                                                                                \nMira ya se está amasando \n       Do9                                                               \nlo recogido en el trigal, \n         Sol                                                    \ncomo se amasan tus palabras \n      Re                                                               \nen mi faz. \n\nRe\nLa semilla triturada \n       Do9\npor la mano y el sudor, \n       Sol\npesa ahora en mis rodillas\n                La\nlo que es más que un don.\n  \nSol        La\nY mientras te contemplo, \nRe            sim\ntodo muere en torno a mí.\n     Sol             mim\nY me pierdo en un horizonte \n             La\nque no tiene fin. \n\nSol                 La\nY ya no encuentro otra verdad,\nfa#m               sim\ny ya no hay nada tan real,\n         Sol           mim\nque te escondes y me guías,\n        Sol        mim\nque te ocultas e iluminas\n              La\ndentro de ese pan.\n[Estribillo]\nRe    Sol                                              \nAdorando, \n         sim              La           \nlo que parece un trozo de pan\n Re     Sol                                                          \ny olvidando \n      sim                La             \nlos pesares que vienen y van \n                   Sol                           \ny en la noche que tiembla \n                Re                                   \nya no quiero tu luz, \n        mim                                                           \nsólo la sed \n                  Sol   mim  Sol             \nde tu sangre y tu cuerpo \n         La       Re                           \nme puede guiar a Ti.\n[/Estribillo]"
+                },
+                {
+                    "titulo": "Agua lávame",
+                    "autor": "Brotes de Olivo",
+                    "tono": "",
+                    "cejilla": 0,
+                    "content": " La       La7  Re      La\nAgua, lávame, purifícame\nRe                La\ndame, agua, tu espíritu.\nRe     Mi  La\n¡Agua, lávame!"
+                }
+            ]
+        },
+        {
+            "title": "Oración 14 de Agosto de 2025",
+            "autor": "jesusmuve",
+            "color": "default"
+        },
+        {
+            "title": "Campamento 2025",
+            "autor": "pedromaciaa",
+            "color": "#aec4db"
+        },
+        {
+            "title": "Pascua 2026",
+            "autor": "miguelangelc",
+            "color": "#ecd189"
+        }
+    ]
+}

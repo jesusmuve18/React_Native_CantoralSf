@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "cantoral_sanfran",
+    "name": "Cantoral Sanfran",
     "slug": "cantoral_sanfran",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "icon": "./assets/sf_icon2.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": false,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/sf_icon2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,13 +17,22 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/sf_icon2.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.jesus_muve.cantoral_sanfran"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/sf_icon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "1240f912-b3af-4b40-b9ae-640eb3c71789"
+      }
     }
   }
 }
