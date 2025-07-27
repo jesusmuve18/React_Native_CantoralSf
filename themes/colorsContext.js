@@ -14,7 +14,7 @@ const ColorsContext = createContext();
 
 export const ColorsProvider = ({ children }) => {
   const [colorsName, setColorsName] = useState('default');
-  const [chordColor, setChordColor] = useState('red')
+  const [chordColor, setChordColor] = useState('#ff0000')
 
   const colors = useMemo(() => colorPalettes[colorsName] ?? defaultColors, [colorsName]);
 

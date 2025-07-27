@@ -1,0 +1,6 @@
+// Inicial el servidor
+npm start // Modo normal
+npx expo start --tunnel // Modo tunel
+
+// Compilar apk
+eas build -p android --profile preview

@@ -80,13 +80,13 @@ export default function List({ navigation }) {
                                 height: circle_color_size,
                                 borderRadius: (circle_color_size/2),
                                 marginRight: 10,
-                                backgroundColor: (chordColor==='custom' || (chordColor.length!==7 && chordColor.length!==4))? 'black' : chordColor,
+                                backgroundColor: chordColor,
                             }}>
                         </View>
                         <DropdownComponent
                             style={{ width: panel_width }}
                             data={[
-                                { label: 'Rojo', value: 'red' },
+                                { label: 'Rojo', value: '#ff0000' },
                                 { label: 'Naranja', value: '#ff9900' },
                                 { label: 'Amarillo', value: '#ffff00' },
                                 { label: 'Verde', value: '#00ff00' },
@@ -98,7 +98,7 @@ export default function List({ navigation }) {
                                 { label: 'B/N', value: theme.mainText },
                                 { label: 'Personalizar', value: 'custom' },
                             ]}
-                            onClick={(value) => setChordColor(value)}
+                            onClick={(value) => setChordColor((value==='custom' || (value.length!==7 && value.length!==4))? theme.mainText : value)}
                             value={chordColor}
                         />
                     </View>
