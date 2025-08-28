@@ -20,7 +20,7 @@ export default function List({ navigation }) {
 
     const back_icon_size = 20;
     const circle_color_size = 30;
-    const panel_width = 150;
+    const panel_width = 250;
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }} edges={['top', 'left', 'right']}>
@@ -32,9 +32,10 @@ export default function List({ navigation }) {
                     <TouchableHighlight style={styles.icon_container} onPress={() => navigation.goBack()} underlayColor="transparent">
                         <BackIcon height={back_icon_size} width={back_icon_size} color={theme.icon} />
                     </TouchableHighlight>
+                    <Text style={[styles.title, {color: theme.title}]}>Ajustes</Text>
                 </View>
 
-                <Header title="Ajustes" />
+
 
                 <View style={styles.entry}>
                     <Text style={[styles.text, { color: theme.mainText }]}>Tema</Text>
@@ -66,7 +67,7 @@ export default function List({ navigation }) {
                 </View>
 
                 <View style={styles.entry}>
-                    <Text style={[styles.text, { color: theme.mainText , width: 100}]}>Color Acordes</Text>
+                    <Text style={[styles.text, { color: theme.mainText}]}>Color Acordes</Text>
                     <View
                         style={{
                             flexDirection: 'row',
@@ -74,15 +75,6 @@ export default function List({ navigation }) {
                             width: panel_width + circle_color_size + 10,
                             justifyContent: 'left'
                         }}>
-                        <View
-                            style={{
-                                width: circle_color_size,
-                                height: circle_color_size,
-                                borderRadius: (circle_color_size/2),
-                                marginRight: 10,
-                                backgroundColor: chordColor,
-                            }}>
-                        </View>
                         <DropdownComponent
                             style={{ width: panel_width }}
                             data={[
@@ -98,9 +90,18 @@ export default function List({ navigation }) {
                                 { label: 'B/N', value: theme.mainText },
                                 { label: 'Personalizar', value: 'custom' },
                             ]}
-                            onClick={(value) => setChordColor((value==='custom' || (value.length!==7 && value.length!==4))? theme.mainText : value)}
+                            onClick={(value) => setChordColor((value === 'custom' || (value.length !== 7 && value.length !== 4)) ? theme.mainText : value)}
                             value={chordColor}
                         />
+                        <View
+                            style={{
+                                width: circle_color_size,
+                                height: circle_color_size,
+                                borderRadius: (circle_color_size / 2),
+                                marginLeft: 15,
+                                backgroundColor: chordColor,
+                            }}>
+                        </View>
                     </View>
                 </View>
 
@@ -133,7 +134,7 @@ export default function List({ navigation }) {
                     />
                 </View>
 
-                
+
 
                 <View style={styles.entry}>
                     <Text style={[styles.text, { color: theme.mainText }]}>Mostrar Acordes</Text>
@@ -164,19 +165,28 @@ const styles = StyleSheet.create({
     navigation_container: {
         height: 50,
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center'
+    },
+
+    icon_container: {
+        marginRight: 20
+    },
+
+    title: {
+        fontSize: 28,
+        fontWeight: 700,
     },
 
     entry: {
         paddingVertical: 7,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        flexDirection: 'column',
+        justifyContent: 'left',
+        alignItems: 'left'
     },
 
     text: {
-        fontSize: 18
+        fontSize: 18,
+        marginVertical: 10
     }
 });
 

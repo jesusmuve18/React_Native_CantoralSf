@@ -38,7 +38,7 @@ export default function Song({ route, navigation }) {
         setTono(song.tono || 'Do');
         setCejilla(0);
         setTranspuesta(0);
-        setVelocidad(25);
+        setVelocidad(33);
     }
 
     const ponerCejilla = (traste) => {

@@ -32,7 +32,7 @@ export default function SongInfo(props) {
 
 const styles = StyleSheet.create({
     general: {
-        borderLeftWidth: 4,
+        borderLeftWidth: 2,
         paddingLeft: 10,
         marginBottom: 20
     },

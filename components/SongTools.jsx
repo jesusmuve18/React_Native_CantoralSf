@@ -17,7 +17,7 @@ export default function SongTools(props) {
   const { colors } = useColors();
   const { showChords } = useNotation();
   const close_icon_size = 15;
-  const button_icon_size = 20;
+  const button_icon_size = 15;
 
   // Valor animado para la posición vertical
   const translateY = useRef(new Animated.Value(100)).current;
@@ -63,47 +63,54 @@ export default function SongTools(props) {
       </View>
 
       <View style={[styles.row]}>
-        <Text style={[styles.label, { color: theme.background }]}>Velocidad (x{velocidadLocal < 10 ? `0.0${velocidadLocal}` : velocidadLocal < 100 ? `0.${velocidadLocal}` : '1.00'})</Text>
-      </View>
-      <View style={[styles.row]}>
-        <Slider
-          style={{ width: '80%' }}
-          minimumValue={0}
-          maximumValue={100}
-          step={1}
-          minimumTrackTintColor={theme.background}
-          thumbTintColor={theme.background}
-          value={velocidadLocal}
-          onValueChange={setVelocidadLocal}
-          onSlidingComplete={() => props.setVelocidad(velocidadLocal)}
-        />
+        <Text style={[styles.label, { color: theme.background }]}>Velocidad </Text>
+        <View style={styles.slider_box}>
+          <Text style={[styles.slider_value, { color: theme.background }]}>x{velocidadLocal < 10 ? `0.0${velocidadLocal}` : velocidadLocal < 100 ? `0.${velocidadLocal}` : '1.00'}</Text>
+          <Slider
+            style={{ width: 150, marginRight: -15 }}
+            minimumValue={0}
+            maximumValue={100}
+            step={1}
+            minimumTrackTintColor={theme.background}
+            thumbTintColor={theme.background}
+            value={velocidadLocal}
+            onValueChange={setVelocidadLocal}
+            onSlidingComplete={() => props.setVelocidad(velocidadLocal)}
+          />
+        </View>
       </View>
 
       {showChords &&
         <View style={[styles.row]}>
           <Text style={[styles.label, { color: theme.background }]}>Cejilla</Text>
-          <TouchableHighlight style={styles.button} onPress={() => props.setCejilla(props.cejilla - 1)} underlayColor="transparent">
-            <MinusIcon width={button_icon_size} height={button_icon_size} color={theme.background} />
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={() => props.setCejilla(props.cejilla + 1)} underlayColor="transparent">
-            <PlusIcon width={button_icon_size} height={button_icon_size} color={theme.background} />
-          </TouchableHighlight>
+          <View style={styles.buttons}>
+            <TouchableHighlight style={[styles.button, { aspectRatio: 1, borderColor: theme.secondaryText }]} onPress={() => props.setCejilla(props.cejilla - 1)} underlayColor="transparent">
+              <MinusIcon width={button_icon_size} height={button_icon_size} color={theme.background} />
+            </TouchableHighlight>
+            <Text style={[styles.number, { color: theme.background, borderColor: theme.secondaryText }]}>{props.cejilla}</Text>
+            <TouchableHighlight style={[styles.button, { aspectRatio: 1, borderColor: theme.secondaryText }]} onPress={() => props.setCejilla(props.cejilla + 1)} underlayColor="transparent">
+              <PlusIcon width={button_icon_size} height={button_icon_size} color={theme.background} />
+            </TouchableHighlight>
+          </View>
         </View>}
 
       {showChords &&
         <View style={[styles.row]}>
           <Text style={[styles.label, { color: theme.background }]}>Transpuesta</Text>
-          <TouchableHighlight style={styles.button} onPress={() => props.setTranspuesta(props.transpuesta - 1)} underlayColor="transparent">
+          <View style={styles.buttons}>
+          <TouchableHighlight style={[styles.button, { aspectRatio: 1, borderColor: theme.secondaryText }]} onPress={() => props.setTranspuesta(props.transpuesta - 1)} underlayColor="transparent">
             <MinusIcon width={button_icon_size} height={button_icon_size} color={theme.background} />
           </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={() => props.setTranspuesta(props.transpuesta + 1)} underlayColor="transparent">
+          <Text style={[styles.number, { color: theme.background }]}>{props.transpuesta}</Text>
+          <TouchableHighlight style={[styles.button, { aspectRatio: 1, borderColor: theme.secondaryText }]} onPress={() => props.setTranspuesta(props.transpuesta + 1)} underlayColor="transparent">
             <PlusIcon width={button_icon_size} height={button_icon_size} color={theme.background} />
           </TouchableHighlight>
+          </View>
         </View>}
 
-      <View style={[styles.row]}>
-        <TouchableHighlight style={styles.button} onPress={() => props.reset()} underlayColor="transparent">
-          <Text style={{ color: theme.background }}>Reset</Text>
+      <View style={[styles.row, { justifyContent: 'center' }]}>
+        <TouchableHighlight style={[styles.button, { borderColor: theme.secondaryText}]} onPress={() => props.reset()} underlayColor="transparent">
+          <Text style={[styles.reset_button, { color: theme.background }]}>Reset</Text>
         </TouchableHighlight>
       </View>
     </Animated.View>
@@ -116,20 +123,19 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    alignItems: 'center',
     zIndex: 1000,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
+    paddingHorizontal: 40
   },
 
   row: {
     flexDirection: 'row',
-    width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10
+    marginBottom: 10,
+    justifyContent: 'space-between'
   },
 
   close_row: {
@@ -137,16 +143,32 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    width: 150,
     fontSize: 16,
     fontWeight: 'bold'
   },
 
+  number: {
+    paddingHorizontal: 15,
+  },
+
+  slider_box: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  buttons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
   button: {
-    width: 40,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 0,
+    borderRadius: 5,
+    padding: 5
   },
 
   button_close: {
@@ -154,4 +176,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  reset_button: {
+    paddingHorizontal: 10
+  }
 });
