@@ -5,11 +5,11 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import * as NavigationBar from 'expo-navigation-bar';
 
 import { ThemeProvider } from '../themes/themeContext';
-import { ColorsProvider, colorsProvider } from '../themes/colorsContext'
+import { ColorsProvider } from '../themes/colorsContext'
 import { NotationProvider } from '../themes/notationContext';
 
 import HomePage from './HomePage'
-import SearchPage from './SearchPage'
+import IndexPage from './IndexPage'
 import ListPage from './ListPage'
 import Navigation from './Navigation'
 import Song from './Song'
@@ -38,7 +38,7 @@ function Tabs() {
           }} />
         <Tab.Screen
           name="Search"
-          component={SearchPage}
+          component={IndexPage}
           listeners={{
             focus: () => setCurrentTab('Search'),
           }} />

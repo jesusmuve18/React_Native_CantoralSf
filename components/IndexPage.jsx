@@ -11,7 +11,7 @@ import SearchBar from './SearchBar';
 import Sections from './Sections';
 import Index from './Index';
 
-import data from "../songs/output.json";
+import data from "../songs/output.json"; // De aquí se sacan las canciones (se deberían coger de la base de datos)
 
 export default function SearchPage() {
 
@@ -29,19 +29,11 @@ export default function SearchPage() {
         return () => clearTimeout(timeout);
     }, [selected]);
 
-    const styles = StyleSheet.create({
-        general: {
-            padding: 20,
-            paddingBottom: 0,
-            height: '100%',
-            backgroundColor: theme.background
-        },
-    });
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }} edges={['top', 'left', 'right']}>
             <StatusBar backgroundColor={theme.background} barStyle={theme.barStyle} />
-            <View style={styles.general}>
+            <View style={[styles.general, { backgroundColor: theme.background }]}>
                 <Header title='Índice' />
                 <SearchBar setText={setText} />
                 <Sections selected={selected} setSelected={setSelected} data={data} />
@@ -50,4 +42,12 @@ export default function SearchPage() {
         </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    general: {
+        padding: 20,
+        paddingBottom: 0,
+        height: '100%',
+    },
+});
 
