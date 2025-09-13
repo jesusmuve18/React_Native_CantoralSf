@@ -4,3 +4,8 @@ npx expo start --tunnel // Modo tunel
 
 // Compilar apk
 eas build -p android --profile preview
+
+// Actualizar dependencias
+rm -rf node_modules
+rm package-lock.json
+npm install

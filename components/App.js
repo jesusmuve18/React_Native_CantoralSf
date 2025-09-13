@@ -59,6 +59,7 @@ export default function App() {
   useEffect(() => { // Ocultar los botones de navegación del móvil
     NavigationBar.setVisibilityAsync("hidden");
     NavigationBar.setBehaviorAsync('overlay-swipe'); // para que reaparezca al deslizar
+    NavigationBar.setBackgroundColorAsync("transparent"); // importante
   }, []);
 
   // const [currentRoute, setCurrentRoute] = useState("Home");

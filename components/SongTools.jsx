@@ -87,7 +87,7 @@ export default function SongTools(props) {
             <TouchableHighlight style={[styles.button, { aspectRatio: 1, borderColor: theme.secondaryText }]} onPress={() => props.setCejilla(props.cejilla - 1)} underlayColor="transparent">
               <MinusIcon width={button_icon_size} height={button_icon_size} color={theme.background} />
             </TouchableHighlight>
-            <Text style={[styles.number, { color: theme.background, borderColor: theme.secondaryText }]}>{props.cejilla}</Text>
+            <Text style={[styles.number, { color: theme.background, borderColor: theme.secondaryText }]}>{props.displaycejilla}</Text>
             <TouchableHighlight style={[styles.button, { aspectRatio: 1, borderColor: theme.secondaryText }]} onPress={() => props.setCejilla(props.cejilla + 1)} underlayColor="transparent">
               <PlusIcon width={button_icon_size} height={button_icon_size} color={theme.background} />
             </TouchableHighlight>

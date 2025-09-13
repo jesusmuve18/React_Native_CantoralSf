@@ -104,7 +104,7 @@ export default function Song({ route, navigation }) {
             </View>
 
             <SongTools
-                cejilla={cejilla} setCejilla={ponerCejilla}
+                cejilla={cejilla} setCejilla={ponerCejilla} displaycejilla={(song.cejilla ? song.cejilla : 0) + cejilla}
                 transpuesta={transpuesta} setTranspuesta={transponer}
                 showTools={showTools} setShowTools={setShowTools}
                 velocidad={velocidad} setVelocidad={ajustarVelocidad}
