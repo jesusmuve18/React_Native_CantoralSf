@@ -2,6 +2,9 @@ import { Text, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 
+/**
+ * Entorno del estribillo (lo pone en negrita)
+ */
 export default function Estribillo({ children }) {
 
     const [fontsLoaded, setFontsLoaded] = useState(false);

@@ -1,41 +1,73 @@
 import { Text, View, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { withObservables } from '@nozbe/watermelondb/react';
+
+import { database } from '../database/database'; 
 
 import { useTheme } from "../themes/themeContext";
-
 import { Matches } from "../functions/searcher";
-
 import IndexItem from "./IndexItem";
 
-export default function Index(props) {
-
+function Index(props) {
   const { theme } = useTheme();
   const [renderedSections, setRenderedSections] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
-  const canciones = props.data.songs;
 
-  // Asignamos índices una sola vez
-  useEffect(() => {
-    for (const seccion in canciones) {
-      const lista = canciones[seccion];
-      lista.forEach((cancion, index) => {
-        cancion.index = index + 1;
-      });
+  // 1. RECONSTRUIR LA ESTRUCTURA JSON DESDE LA BASE DE DATOS LOCAL
+  // Usamos useMemo para que esto solo se recalcule si la base de datos cambia
+  const cancionesDict = useMemo(() => {
+    const dict = {};
+    
+    // Crear las claves para cada categoría (ej: dict["General"] = [])
+    props.categorias.forEach(cat => {
+        dict[cat.nombre] = [];
+    });
+
+    // Crear un mapa rápido de canciones por ID para no anidar bucles
+    const mapCanciones = {};
+    props.canciones.forEach(c => {
+        mapCanciones[c.id] = c;
+    });
+
+    // Llenar el diccionario cruzando la tabla pivote
+    props.cancionesCategorias.forEach(cc => {
+        // En WatermelonDB, podemos acceder a los IDs crudos usando _raw
+        const catName = props.categorias.find(cat => cat.id === cc._raw.categoria_id)?.nombre;
+        const cancion = mapCanciones[cc._raw.cancion_id];
+        
+        if (catName && cancion) {
+            dict[catName].push({
+                titulo: cancion.titulo,
+                autor: cancion.autor,
+                numero: cc.numero, // El número de orden que subimos con Python
+                songModel: cancion // Guardamos el Modelo completo para pasarlo a la siguiente pantalla
+            });
+        }
+    });
+
+    // Ordenar cada sección según su 'numero' original y asignarle el 'index' para la vista
+    for (const seccion in dict) {
+        dict[seccion].sort((a, b) => a.numero - b.numero);
+        dict[seccion].forEach((cancion, idx) => {
+            cancion.index = idx + 1;
+        });
     }
-  }, []);
 
-  // Ejecutamos filtrado cada vez que cambia el input o la sección
+    return dict;
+  }, [props.canciones, props.categorias, props.cancionesCategorias]);
+
+  // 2. EJECUTAR FILTRADO (Tu lógica original casi intacta)
   useEffect(() => {
-    setLoading(true); // Activamos el spinner de inmediato
+    setLoading(true);
 
     const handle = setTimeout(() => {
-      const nuevasSecciones = Object.entries(canciones)
+      // Usamos el diccionario reconstruido en lugar de props.data.songs
+      const nuevasSecciones = Object.entries(cancionesDict)
         .map(([section, songs], section_index) => {
           const section_selected = props.selected === section || props.selected === "Todas";
           if (!section_selected) return null;
-
 
           // Mecanismo de búsqueda
           const filteredSongs = songs.filter((song) =>
@@ -55,7 +87,8 @@ export default function Index(props) {
                   key={`${section}-${song_index}`}
                   title={song.titulo}
                   autor={song.autor}
-                  onClick={() => navigation.navigate("Song", { song })}
+                  // Pasamos el modelo completo de WatermelonDB para que la pantalla Song tenga toda la info
+                  onClick={() => navigation.navigate("Song", { song: song.songModel })}
                 />
               ))}
             </View>
@@ -67,9 +100,8 @@ export default function Index(props) {
       setLoading(false);
     }, 0);
 
-    return () => clearTimeout(handle); // Limpieza si cambia rápido
-  }, [props.input, props.selected, theme]);
-
+    return () => clearTimeout(handle);
+  }, [props.input, props.selected, theme, cancionesDict]); // Añadimos cancionesDict a las dependencias
 
   return (
     <ScrollView style={styles.general}>
@@ -88,18 +120,24 @@ export default function Index(props) {
 }
 
 const styles = StyleSheet.create({
-    general: {
-      height: '100%',
-    },
+  general: {
+    height: '100%',
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    marginVertical: 10,
+  },
+  noResultsText: {
+    marginTop: 10,
+  }
+});
 
-    sectionTitle: {
-      fontSize: 20,
-      fontWeight: "600",
-      marginVertical: 10,
-      
-    },
+// 3. LA MAGIA: Inyectamos las 3 tablas necesarias en el componente
+const enhance = withObservables([], () => ({
+  canciones: database.collections.get('canciones').query().observe(),
+  categorias: database.collections.get('categorias').query().observe(),
+  cancionesCategorias: database.collections.get('canciones_categorias').query().observe(),
+}));
 
-    noResultsText: {
-      marginTop: 10,
-    }
-  });
+export default enhance(Index);

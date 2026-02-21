@@ -2,7 +2,6 @@ import Acorde from '../components/Acorde'
 import Estribillo from '../components/Estribillo';
 import { Text } from 'react-native';
 
-
 import notes from "../data/notation.json"
 
 /***************************************************************************************************************************************************************
@@ -66,14 +65,36 @@ const regexToken = new RegExp(
 /***************************************************************************************************************************************************************/
 // Funciones
 
+/** Comprueba si una línea es de acordes
+ *  
+ * @param {string} linea 
+ * @returns True si la línea es de acordes
+ *          False en otro caso
+ */
 function esLineaDeAcordes(linea) {
     return LineaAcordesRegex.test(linea);
 }
 
+/** Comprueba si una palabra es un acorde
+ *  
+ * @param {string} palabra 
+ * @returns True si la palabra es un acorde
+ *          False en otro caso
+ */
 function esAcorde(palabra) {
     return AcordeRegex.test(palabra);
 }
 
+/** Procesa un acorde devolviendo su componente
+ * 
+ * @param {string} acorde 
+ * @param {string} notacion 
+ * @param {int} transpuesta 
+ * @param {int} cejilla 
+ * @param {int} id_acorde 
+ * 
+ * @returns Componente Acorde correctamente configurado
+ */
 function procesarAcorde(acorde, notacion, transpuesta, cejilla, id_acorde) {
 
     const match = acorde.match(AcordeRegexParts);
@@ -93,7 +114,16 @@ function procesarAcorde(acorde, notacion, transpuesta, cejilla, id_acorde) {
     );
 }
 
-// Aplicamos la expresión sobre cada línea individual
+/** Procesa una línea de acordes
+ * 
+ * @param {string} linea 
+ * @param {string} notacion 
+ * @param {int} transpuesta 
+ * @param {int} cejilla 
+ * @param {int} id_linea 
+ * 
+ * @returns Línea de acordes procesada con los componentes Acordes
+ */
 function procesarLineaAcordes(linea, notacion, transpuesta, cejilla, id_linea) {
 
     const match = LineaAcordesRegex.exec(linea);
@@ -128,6 +158,16 @@ function procesarLineaAcordes(linea, notacion, transpuesta, cejilla, id_linea) {
     return resultado;
 }
 
+/** Formatea la letra de una canción 
+ * 
+ * @param {string} content letra de la canción
+ * @param {string} notation notación 
+ * @param {int} transpose transposición total
+ * @param {int} capo traste de la cejilla
+ * @param {Boolean} showChords True para mostrar acordes
+ * 
+ * @returns Canción completa procesada con los componentes Acordes
+ */
 export function Formatear(content, notation, transpose, capo, showChords) {
     if (!content || content.length === 0) return null;
 
@@ -205,7 +245,12 @@ export function Formatear(content, notation, transpose, capo, showChords) {
     return lineasProcesadas;
 }
 
-// Devuelve el índice de una nota (número del 0 al 11)
+/**  Índice de una nota
+ * 
+ * @param {string} nota Nota de la que se quiere saber el índice
+ * 
+ * @returns Índice de una nota (número del 0 al 11)
+*/
 function Indice(nota) {
     const notaMinuscula = nota.toLowerCase();
 
@@ -224,8 +269,14 @@ function Indice(nota) {
     return -1;
 }
 
-// Devuelve la nota dado un índice (según la notación seleccionada)
-function Nota_indice(indice, notacion) {
+/** Devuelve la nota dado un índice (según la notación seleccionada)
+ * 
+ * @param {int} indice 
+ * @param {string} notacion 
+ * 
+ * @returns Nota según la notación
+ */
+function NotaIndice(indice, notacion) {
     const acordes = notes[notacion["language"]][notacion["mode"]];
 
     while (indice < 0) {
@@ -235,12 +286,21 @@ function Nota_indice(indice, notacion) {
     return acordes[indice % acordes.length];
 }
 
-// Procesa un acorde
+/** Formatea un acorde
+ * 
+ * @param {string} nota 
+ * @param {string} variacion
+ * @param {string} bajo
+ * @param {int} transpuesta
+ * @param {string} notacion 
+ * 
+ * @returns Nota ajustada con el formato NotaVariacion/Bajo y según el tono y la variación
+*/
 export function formatearAcorde(nota, variacion, bajo, transpuesta, notacion) {
 
-    let nota_procesada = (nota && nota.length > 0) ? Nota_indice(Indice(nota) + transpuesta, notacion) : "";
+    let nota_procesada = (nota && nota.length > 0) ? NotaIndice(Indice(nota) + transpuesta, notacion) : "";
     let variacion_procesada = (variacion && variacion.length > 0) ? variacion : "";
-    let bajo_procesado = (bajo && bajo.length > 0) ? "/" + Nota_indice(Indice(bajo) + transpuesta, notacion) : "";
+    let bajo_procesado = (bajo && bajo.length > 0) ? "/" + NotaIndice(Indice(bajo) + transpuesta, notacion) : "";
 
     // Pongo en minúscula la nota si la variación es menor
     if (nota_procesada && notacion["language"] == "europe" && variacion_procesada.length !== 0 && variacion_procesada.at(0) === 'm'

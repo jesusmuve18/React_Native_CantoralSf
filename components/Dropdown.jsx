@@ -5,6 +5,17 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { useTheme } from '../themes/themeContext';
 import { useColors } from '../themes/colorsContext';
 
+
+/** Componente deslizable verticalmente (se usa en la configuración)
+ * 
+ * @param {*} props:
+ * style={{ hoja de estilos }}
+ * data={[
+ *     { label: 'Etiqueta', value: 'Valor' } // Todos los que se quieran
+ * ]}
+ * onClick={(value) => setter(value)}
+ * value - Valor inicial
+ */
 export default function DropdownComponent(props) {
 
     const { theme } = useTheme();

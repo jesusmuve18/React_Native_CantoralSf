@@ -1,20 +1,18 @@
-import { StyleSheet, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useState, useEffect } from 'react';
-import { StatusBar } from 'react-native';
-
+import { withObservables } from '@nozbe/watermelondb/react';
 
 import { useTheme } from '../themes/themeContext';
+import { database } from '../database/database'; 
 
 import Header from './Header';
 import SearchBar from './SearchBar';
 import Sections from './Sections';
 import Index from './Index';
 
-import data from "../songs/output.json"; // De aquí se sacan las canciones (se deberían coger de la base de datos)
-
-export default function SearchPage() {
-
+// 1. Recibimos 'canciones' como prop inyectada por WatermelonDB
+const SearchPage = ({ canciones }) => {
     const { theme } = useTheme();
 
     const [text, setText] = useState("");
@@ -24,11 +22,10 @@ export default function SearchPage() {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setAppliedSelected(selected);
-        }, 0); // O usa requestAnimationFrame o InteractionManager si prefieres
+        }, 0);
 
         return () => clearTimeout(timeout);
     }, [selected]);
-
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }} edges={['top', 'left', 'right']}>
@@ -36,8 +33,10 @@ export default function SearchPage() {
             <View style={[styles.general, { backgroundColor: theme.background }]}>
                 <Header title='Índice' />
                 <SearchBar setText={setText} />
-                <Sections selected={selected} setSelected={setSelected} data={data} />
-                <Index input={text} selected={appliedSelected} data={data} />
+                
+                {/* 2. Pasamos las canciones de la BD en lugar del JSON */}
+                <Sections selected={selected} setSelected={setSelected} data={canciones} />
+                <Index input={text} selected={appliedSelected} data={canciones} />
             </View>
         </SafeAreaView>
     );
@@ -51,3 +50,9 @@ const styles = StyleSheet.create({
     },
 });
 
+// 3. Envolvemos el componente para observar la tabla 'canciones'
+const enhance = withObservables([], () => ({
+    canciones: database.collections.get('canciones').query().observe(),
+}));
+
+export default enhance(SearchPage);

@@ -3,11 +3,20 @@ import { useState, useEffect } from "react";
 import * as Font from 'expo-font';
 
 import { useColors } from "../themes/colorsContext";
-
-
 import { formatearAcorde } from "../functions/formater";
 
 
+/** Componente Acorde
+ * 
+ * @param {list} props: 
+ *  key - para mayor velocidad en el renderizado
+ *  acorde - cadena completa del acorde
+ *  nota - Nota
+ *  variaciones - Variaciones
+ *  bajo - Bajo
+ *  notation - Notación
+ *  transpuesta - Transposición (normalmente transpuesta-cejilla)
+ */
 export default function Acorde(props) {
 
     const { chordColor } = useColors();

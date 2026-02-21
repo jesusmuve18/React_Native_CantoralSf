@@ -16,6 +16,18 @@ import Song from './Song'
 import List from './List'
 import Settings from './SettingsPage';
 
+import { syncDatabase } from '../database/sync'
+
+const handleSincronizar = async () => {
+  try {
+    console.log('Sincronizando...')
+    await syncDatabase()
+    console.log('¡Sincronización completada con éxito!')
+  } catch (error) {
+    console.error('Falló la sincronización:', error)
+  }
+}
+
 const Tab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +73,8 @@ export default function App() {
     NavigationBar.setBehaviorAsync('overlay-swipe'); // para que reaparezca al deslizar
     NavigationBar.setBackgroundColorAsync("transparent"); // importante
   }, []);
+
+  handleSincronizar()
 
   // const [currentRoute, setCurrentRoute] = useState("Home");
 

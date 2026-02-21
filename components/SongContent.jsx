@@ -8,6 +8,15 @@ import * as Font from 'expo-font';
 
 import { Formatear } from "../functions/formater";
 
+
+/** Componente SongContent
+ * 
+ * @param {list} props:
+ *  cejilla - traste donde colocar la cejilla
+ *  transpuesta - número de semitonos que se transpone
+ *  song - canción (contiene el título, el autor y el contenido)
+ *  notation - notación a usar
+ */
 export default function SongContent(props) {
 
     const { theme } = useTheme();
