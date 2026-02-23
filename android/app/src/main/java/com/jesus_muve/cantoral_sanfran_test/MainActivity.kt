@@ -1,4 +1,4 @@
-package com.jesus_muve.cantoral_sanfran
+package com.jesus_muve.cantoral_sanfran_test
 
 import android.os.Build
 import android.os.Bundle

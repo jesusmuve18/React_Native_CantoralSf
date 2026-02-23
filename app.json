@@ -21,7 +21,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.jesus_muve.cantoral_sanfran"
+      "package": "com.jesus_muve.cantoral_sanfran_test"
     },
     "web": {
       "favicon": "./assets/sf_icon.png"

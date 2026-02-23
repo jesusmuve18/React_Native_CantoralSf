@@ -35,7 +35,7 @@ const SearchPage = ({ canciones }) => {
                 <SearchBar setText={setText} />
                 
                 {/* 2. Pasamos las canciones de la BD en lugar del JSON */}
-                <Sections selected={selected} setSelected={setSelected} data={canciones} />
+                {/*Sections selected={selected} setSelected={setSelected} data={canciones} */}
                 <Index input={text} selected={appliedSelected} data={canciones} />
             </View>
         </SafeAreaView>

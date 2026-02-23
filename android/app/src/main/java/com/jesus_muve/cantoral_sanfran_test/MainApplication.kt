@@ -1,9 +1,9 @@
-package com.jesus_muve.cantoral_sanfran
+package com.jesus_muve.cantoral_sanfran_test
 
 
 import android.app.Application
-import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage;
-import com.facebook.react.bridge.JSIModulePackage;        
+//import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage;
+//import com.facebook.react.bridge.JSIModulePackage;
 
 import android.content.res.Configuration
 
