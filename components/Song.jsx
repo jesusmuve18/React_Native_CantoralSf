@@ -3,6 +3,9 @@ import { useEffect, useState, useRef } from "react";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
 
+import { withObservables } from '@nozbe/watermelondb/react';
+import { database } from '../database/database'
+
 import { useTheme } from "../themes/themeContext";
 import { useColors } from "../themes/colorsContext";
 import { useNotation } from "../themes/notationContext";
@@ -18,7 +21,7 @@ import PauseIcon from "../assets/images/pause_button/default.svg"
 
 
 
-export default function Song({ route, navigation }) {
+function Song({ song, navigation }) {
 
     const { theme } = useTheme();
     const { colors } = useColors();
@@ -27,7 +30,8 @@ export default function Song({ route, navigation }) {
     const back_icon_size = 20;
     const play_icon_size = 20;
 
-    const song = route.params.song;
+    // Si por algún motivo la canción no existe o está cargando
+    if (!song) return null;
 
     const [tono, setTono] = useState(song.tono || 'Do');
     const [cejilla, setCejilla] = useState(0);
@@ -155,12 +159,18 @@ export default function Song({ route, navigation }) {
                 <SongContent
                     cejilla={cejilla}
                     transpuesta={transpuesta}
-                    song={song}
+                    content={song.letraRaw}
                     notation={{ language: notationLanguage, mode: notationMode }} />
             </ScrollView>
         </SafeAreaView>
     )
 }
+
+const enhance = withObservables(['route'], ({ route }) => ({
+    song: database.collections.get('canciones').findAndObserve(route.params.id)
+}));
+
+export default enhance(Song);
 
 const styles = StyleSheet.create({
 

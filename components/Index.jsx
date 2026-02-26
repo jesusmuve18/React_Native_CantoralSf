@@ -15,9 +15,6 @@ function Index({ canciones, searchText }) { // 'canciones' ya llega filtrado por
     const navigation = useNavigation();
 
     const filteredSongs = useMemo(() => {
-
-        console.log('buscando...')
-
         if (!searchText) return canciones;
 
         return canciones.filter((song) =>
@@ -40,14 +37,14 @@ function Index({ canciones, searchText }) { // 'canciones' ya llega filtrado por
     <FlatList
       data={filteredSongs}
       keyExtractor={(item) => item.id} // Watermelon siempre da un ID único string
-      initialNumToRender={20} // Mejora la velocidad de carga inicial
+      initialNumToRender={10} // Mejora la velocidad de carga inicial
       style={styles.general}
       renderItem={({ item, index }) => (
         <IndexItem
           index={index + 1}
           title={item.titulo}
           autor={item.autor}
-          onClick={() => navigation.navigate("Song", { database: database, id: item.id })}
+          onClick={() => navigation.navigate("Song", { id: item.id })}
         />
       )}
     />

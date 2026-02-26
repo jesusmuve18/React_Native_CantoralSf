@@ -31,7 +31,7 @@ export default function SongContent(props) {
 
     }, []);
 
-    const content = Formatear(props.song.content, props.notation, props.transpuesta, props.cejilla, showChords);
+    const content = Formatear(props.content, props.notation, props.transpuesta, props.cejilla, showChords);
 
     if (!fontsLoaded) {
         return null; // O una pantalla de carga

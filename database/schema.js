@@ -40,8 +40,8 @@ export const mySchema = appSchema({
     tableSchema({
       name: 'canciones',
       columns: [
-        { name: 'titulo', type: 'string' },
-        { name: 'autor', type: 'string', isOptional: true },
+        { name: 'titulo', type: 'string', isIndexed: true },
+        { name: 'autor', type: 'string', isOptional: true, isIndexed: true },
         { name: 'tono', type: 'string', isOptional: true },
         { name: 'cejilla', type: 'number' },
         { name: 'letra_raw', type: 'string', isOptional: true },
