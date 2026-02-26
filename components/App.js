@@ -9,7 +9,7 @@ import { ColorsProvider } from '../themes/colorsContext'
 import { NotationProvider } from '../themes/notationContext';
 
 import HomePage from './HomePage'
-import IndexPage from './IndexPage'
+import SearchPage from './SearchPage'
 import ListPage from './ListPage'
 import Navigation from './Navigation'
 import Song from './Song'
@@ -50,7 +50,7 @@ function Tabs() {
           }} />
         <Tab.Screen
           name="Search"
-          component={IndexPage}
+          component={SearchPage}
           listeners={{
             focus: () => setCurrentTab('Search'),
           }} />

@@ -4,6 +4,10 @@ import { text, field, date, children, readonly } from '@nozbe/watermelondb/decor
 export default class Cancion extends Model {
   static table = 'canciones'
 
+  static associations = {
+      canciones_categorias: { type: 'has_many', foreignKey: 'cancion_id' },
+    }
+
   @text('titulo') titulo
   @text('autor') autor
   @text('tono') tono
