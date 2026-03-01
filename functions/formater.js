@@ -2,7 +2,7 @@ import Acorde from '../components/Acorde'
 import Estribillo from '../components/Estribillo';
 import { Text } from 'react-native';
 
-import notes from "../data/notation.json"
+import notes from "./notation.json"
 
 /***************************************************************************************************************************************************************
 // Definiciones de Expresiones Regulares:

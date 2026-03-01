@@ -6,8 +6,6 @@ import { useTheme } from "../themes/themeContext";
 
 import ListItem from './ListItem'
 
-
-
 export default function Lists(props) {
   const { theme } = useTheme();
   const navigation = useNavigation();
